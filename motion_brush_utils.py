@@ -209,6 +209,10 @@ class MotionBrush():
                 motion_bucket_id=motion_bucket_id,
                 noise_aug_strength=noise_aug_strength,
             ).frames
-        frames_np = [np.array(frame) for frame in frames[0]]
-        make_gif(frames_np, f"tmp/{image_name}.gif", fps=fps, rescale=0.5)
+
+        #resize frames
+
+        frames_np = [np.array(frame.resize((int(image.shape[1]), int(image.shape[0])))) for frame in frames[0]]
+        # frames_np = [np.array(frame) for frame in frames[0]]
+        make_gif(frames_np, f"tmp/{image_name}.gif", fps=fps, rescale=0.9)
         return f'tmp/{image_name}.gif'
